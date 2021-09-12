@@ -451,18 +451,23 @@ function set_elemental_obi_cape_ring(spell)
     gear.ElementalObi.name = obi_name or gear.default.obi_waist  or ""
     
     if obi_name then
-        if player.inventory['Twilight Cape'] or player.wardrobe['Twilight Cape'] then
+        if has_equippable('Twilight Cape') then
             gear.ElementalCape.name = "Twilight Cape"
         end
-        if (player.inventory['Zodiac Ring'] or player.wardrobe['Zodiac Ring']) and spell.english ~= 'Impact' and
+        if has_equippable('Zodiac Ring') and spell.english ~= 'Impact' and
             not S{'Divine Magic','Dark Magic','Healing Magic'}:contains(spell.skill) then
             gear.ElementalRing.name = "Zodiac Ring"
+        end
+        if has_equippable('Hachirin-no-Obi') and S{'Drain', 'Drain II', 'Drain III', 'Aspir', 'Aspir II', 'Aspir III'}:contains(spell.english) then
+            gear.DrainWaist.name = 'Hachirin-no-Obi'
         end
     else
         gear.ElementalCape.name = gear.default.obi_back
         gear.ElementalRing.name = gear.default.obi_ring
+        gear.DrainWaist.name = gear.default.drain_waist
     end
 end
+
 
 
 -- Function to get the appropriate fast cast and/or recast staves for the current spell.
@@ -474,6 +479,7 @@ function set_elemental_staff(spell)
     gear.FastcastStaff.name = get_elemental_item_name("fastcast_staff", S{spell.element}) or gear.default.fastcast_staff  or ""
     gear.RecastStaff.name   = get_elemental_item_name("recast_staff", S{spell.element})   or gear.default.recast_staff    or ""
 end
+
 
 
 -- Gets the name of an elementally-aligned piece of gear within the player's
@@ -497,7 +503,7 @@ function get_elemental_item_name(item_type, valid_elements, restricted_to_elemen
     local item_map = elements[item_type:lower()..'_of']
     
     for element in (potential_elements.it or it)(potential_elements) do
-        if valid_elements:contains(element) and (player.inventory[item_map[element]] or player.wardrobe[item_map[element]]) then
+        if valid_elements:contains(element) and has_equippable(item_map[element]) then
             return item_map[element]
         end
     end
@@ -527,7 +533,7 @@ function set_macro_page(set,book)
             add_to_chat(123,'Error setting macro page: Macro book ('..tostring(book)..') must be between 1 and 20.')
             return
         end
-        send_command('@input /macro book '..tostring(book)..';wait .1;input /macro set '..tostring(set))
+        send_command('@input /macro book '..tostring(book)..';wait 1.1;input /macro set '..tostring(set))
     else
         send_command('@input /macro set '..tostring(set))
     end
@@ -573,6 +579,11 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- Utility functions for vars or other data manipulation.
 -------------------------------------------------------------------------------------------------------------------
+
+-- Find item in equippable inventory
+function has_equippable(name)
+    return player.inventory[name] or player.wardrobe[name] or player.wardrobe2[name] or player.wardrobe3[name] or player.wardrobe4[name]
+end
 
 -- Attempt to locate a specified name within the current alliance.
 function find_player_in_alliance(name)

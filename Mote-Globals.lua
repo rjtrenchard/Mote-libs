@@ -21,7 +21,7 @@ function define_global_sets()
 	-- Staffs
 	gear.Staff = {}
 	gear.Staff.HMP = 'Chatoyant Staff'
-	gear.Staff.PDT = 'Earth Staff'
+	gear.Staff.PDT = 'Malignance Staff'
 	
 	-- Dark Rings
 	gear.DarkRing = {}
@@ -29,13 +29,21 @@ function define_global_sets()
 	gear.DarkRing.magical = {name="Dark Ring", augments={'Magic dmg. taken -6%','Breath dmg. taken -5%'}}
 	
 	-- Default items for utility gear values.
-	gear.default.weaponskill_neck = "Asperity Necklace"
-	gear.default.weaponskill_waist = "Caudata Belt"
-	gear.default.obi_waist = "Cognition Belt"
+	gear.default.weaponskill_neck = "Fotia Gorget"
+	gear.default.weaponskill_waist = "Fotia Belt"
+	gear.default.obi_waist = "Eschan Stone"
 	gear.default.obi_back = "Toro Cape"
 	gear.default.obi_ring = "Strendu Ring"
+	gear.default.drain_waist = "Austerity belt +1"
 	gear.default.fastcast_staff = ""
 	gear.default.recast_staff = ""
+
+	--[[sets.precast.item['Pickaxe'] = {body="Field Tunica", hands="Field Gloves", legs="Dredger Hose", feet="Field Boots"}
+	sets.precast.item['Sickle'] = {body="Field Tunica", hands="Field Gloves", legs="Field Hose", feet="Agrarian Boots"}
+	sets.precast.item['Hatchet'] = {body="Field Tunica", hands="Field Gloves", legs="Field Hose", feet="Field Boots"}
+	sets.precast.Adoulin.item['Pickaxe'] = {body="Trench Tunic", hands="Field Gloves", legs="Dredger Hose", feet="Field Boots"}
+	sets.precast.Adoulin.item['Sickle'] = {body="Trench Tunic", hands="Field Gloves", legs="Field Hose", feet="Agrarian Boots"}
+	sets.precast.Adoulin.item['Hatchet'] = {body="Trench Tunic", hands="Treefeller Gloves", legs="Field Hose", feet="Field Boots"}]]
 end
 
 -------------------------------------------------------------------------------------------------------------------

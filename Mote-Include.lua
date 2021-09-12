@@ -133,6 +133,7 @@ function init_include()
     gear.ElementalRing = {name=""}
     gear.FastcastStaff = {name=""}
     gear.RecastStaff = {name=""}
+    gear.DrainWaist = {name=""}
 
 
     -- Load externally-defined information (info that we don't want to change every time this file is updated).
