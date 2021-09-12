@@ -448,6 +448,16 @@ function set_elemental_obi_cape_ring(spell)
     end
 
     local obi_name = get_elemental_item_name("obi", S{spell.element}, world_elements)
+
+    -- use hachirin-no-obi if it exists and the world elements are in favor.
+    local potential_elements = world_elements or elements.list
+
+    for element in (potential_elements.it or it)(potential_elements) do
+        if S{spell.element}:contains(element) and has_equippable('Hachirin-no-obi') then
+            obi_name = 'Hachirin-no-obi'
+        end
+    end
+    
     gear.ElementalObi.name = obi_name or gear.default.obi_waist  or ""
     
     if obi_name then
@@ -458,13 +468,13 @@ function set_elemental_obi_cape_ring(spell)
             not S{'Divine Magic','Dark Magic','Healing Magic'}:contains(spell.skill) then
             gear.ElementalRing.name = "Zodiac Ring"
         end
-        if has_equippable('Hachirin-no-Obi') and S{'Drain', 'Drain II', 'Drain III', 'Aspir', 'Aspir II', 'Aspir III'}:contains(spell.english) then
-            gear.DrainWaist.name = 'Hachirin-no-Obi'
+        if S{'Drain', 'Drain II', 'Drain III', 'Aspir', 'Aspir II', 'Aspir III'}:contains(spell.english) then
+            gear.DrainWaist.name = gear.ElementalObi.name
         end
     else
         gear.ElementalCape.name = gear.default.obi_back
         gear.ElementalRing.name = gear.default.obi_ring
-        gear.DrainWaist.name = gear.default.drain_waist
+        gear.DrainWaist.name = gear.default.drain_waist or ""
     end
 end
 
