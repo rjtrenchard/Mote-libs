@@ -453,11 +453,12 @@ function set_elemental_obi_cape_ring(spell)
     local potential_elements = world_elements or elements.list
 
     for element in (potential_elements.it or it)(potential_elements) do
-        if S{spell.element}:contains(element) and has_equippable('Hachirin-no-obi') then
+        if S{spell.element}:contains(element) and 
+has_equippable('Hachirin-no-obi') then
             obi_name = 'Hachirin-no-obi'
         end
     end
-    
+ 
     gear.ElementalObi.name = obi_name or gear.default.obi_waist  or ""
     
     if obi_name then
@@ -592,7 +593,7 @@ end
 
 -- Find item in equippable inventory
 function has_equippable(name)
-    return player.inventory[name] or player.wardrobe[name] or player.wardrobe2[name] or player.wardrobe3[name] or player.wardrobe4[name]
+    return player.inventory[name] or player.wardrobe[name] or player.wardrobe2[name] or player.wardrobe3[name] or player.wardrobe4[name] or player.wardrobe5[name] or player.wardrobe6[name] or player.wardrobe7[name] or player.wardrobe8[name]
 end
 
 -- Attempt to locate a specified name within the current alliance.
